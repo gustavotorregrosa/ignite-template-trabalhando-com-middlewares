@@ -37,16 +37,16 @@ function checksTodoExists(request, response, next) {
 
 
   if (!validate(id)) {
-    return response.status(400).json({ message: 'invalid ID' })
+    return response.status(400).json({ error: 'invalid ID' })
   }
 
   if (typeof user == 'undefined') {
-    return response.status(404).json({ message: 'User not found' })
+    return response.status(404).json({ error: 'User not found' })
   }
 
   const todo = user.todos.find(_todo => _todo.id == id)
   if (typeof todo == 'undefined') {
-    return response.status(404).json({ message: 'TODO not found' })
+    return response.status(404).json({ error: 'TODO not found' })
   }
 
   request.user = user
@@ -60,7 +60,7 @@ function findUserById(request, response, next) {
   const user = users.find(_user => _user.id == id)
 
   if (typeof user == 'undefined') {
-    return response.status(404).json({ message: 'user not found' })
+    return response.status(404).json({ error: 'user not found' })
   }
 
   request.user = user
